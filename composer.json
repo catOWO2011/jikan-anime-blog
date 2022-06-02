@@ -4,5 +4,9 @@
   },
   "require-dev": {
       "heroku/heroku-buildpack-php": "^218.0"
-  }
+  },
+  "post-install-cmd": [
+    "php artisan clear-compiled",
+    "chmod -R 777 src/"
+  ]
 }
