@@ -1,5 +1,8 @@
 {
-  "post-install-cmd": [
-    "chmod -R 777 src/"
-  ]
+  "require": {
+      "twig/twig": "^3.4"
+  },
+  "require-dev": {
+      "heroku/heroku-buildpack-php": "^218.0"
+  }
 }
