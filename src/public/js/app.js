@@ -1,16 +1,14 @@
-$(document).ready(function(){
-  // $('.container').text('added text using jquery');
+import utils from './utils.js';
 
-  var swiper = new Swiper(".mySwiper", {
-    cssMode: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-      el: ".swiper-pagination",
-    },
-    mousewheel: true,
-    keyboard: true,
+$(document).ready(function(){
+
+  utils.buildSlider({
+    selector: '.swiper-list-seasons-now',
+    classData: 'seasons-now-slide'
+  });
+
+  utils.buildPopularSlider({
+    selector: '.more-pupular-anime',
+    classData: 'more-popular-slide'
   });
 });

@@ -1,0 +1,102 @@
+body {
+  background-color: #DAECFC;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mySwiper {
+  height: 300px;
+}
+
+.swiper .swiper-slide {
+  background-size: cover;
+  display: inline-block;
+  height: auto;
+}
+
+
+.swiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper .swiper-slide a {
+  text-decoration: none;
+  position: relative;
+}
+
+.swiper .swiper-slide .title {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  padding: 5px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #007CEF;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swiper-pagination {
+  position: relative;
+  margin-top: 20px;
+}
+
+.menu-body {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 25px 25px 0px 0px;
+  padding: 50px 0px;
+}
+
+.swiper-list-seasons-now p {
+  text-transform: capitalize;
+}
+
+.swiper-list-seasons-now {
+  padding: 50px;
+}
+
+#my-anime-list-body {
+  background-color: #ffffff;
+  margin: 0px 50px;
+}
+
+/* POPULAR ANIME CONTAINER */
+
+.more-pupular-anime {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: contents;
+}
+
+.more-pupular-anime .description-card {
+  background: #ffffff;
+  max-width: 600px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+}
+
+.more-pupular-anime .image-card {
+  background-position: top center;
+  padding: 30%;
+}
+
+.more-pupular-anime .swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  margin: 30px 50px 0px 50px;
+  border-radius: 25px;
+}
