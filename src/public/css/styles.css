@@ -3,10 +3,6 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.mySwiper {
-  height: 300px;
-}
-
 .swiper .swiper-slide {
   background-size: cover;
   display: inline-block;
@@ -17,6 +13,8 @@ body {
 .swiper .swiper-slide img {
   width: 100%;
   height: 100%;
+  margin-top: 12px;
+  top: 0%;
 }
 
 .swiper .swiper-slide a {
@@ -52,12 +50,42 @@ body {
   padding: 50px 0px;
 }
 
+.swiper.seasons-now-slide {
+  padding: 40px;
+}
+
 .swiper-list-seasons-now p {
   text-transform: capitalize;
 }
 
 .swiper-list-seasons-now {
   padding: 50px;
+}
+
+.swiper-list-seasons-now .title {
+  display: none;
+}
+
+.swiper-list-seasons-now .slide-card img {
+  border-radius: 15px;
+}
+
+.swiper-list-seasons-now .slide-card {
+  border-radius: 15px;
+}
+
+.swiper-list-seasons-now .slide-card:hover {
+  transform: scale(1.2);
+}
+
+.swiper-list-seasons-now .slide-card:hover img {
+  border: solid 3px #007CEF;
+}
+
+.swiper-list-seasons-now .slide-card:hover .title {
+  display: block;
+  border-radius: 0px 0px 15px 15px;
+  text-align: center;
 }
 
 #my-anime-list-body {
@@ -84,6 +112,7 @@ body {
   flex-direction: row;
   overflow: hidden;
   width: 100%;
+  border-radius: 20px;
 }
 
 .more-pupular-anime .image-card {
@@ -99,4 +128,10 @@ body {
 header {
   margin: 30px 50px 0px 50px;
   border-radius: 25px;
+}
+
+.more-pupular-anime .description-card .description-text {
+  padding: 40px;
+  display: flex;
+  align-items: center;
 }

@@ -9,40 +9,6 @@ const Utils = function () {
     return data;
   };
 
-  this.buildHTMLSlides = (items) => {
-
-    const filteredItems = _.map(items.slice(0, 23), item => {
-      const newItem = {};
-      newItem.title = item.title;
-      newItem.imageUrl = item.images.jpg.large_image_url;
-      return newItem;
-    });
-
-    // <div class="title"><p><%- item.title %></p></div>
-    let templateString = `
-      <div class="swiper season-swiper">
-        <div class="swiper-wrapper">
-          <%
-            _.each(items, (item, key, list) => {
-          %>
-            <div class="swiper-slide">
-              <a type="link" href="">
-                <img src="<%- item.imageUrl %>" />
-                <div class="title"><p><%- item.title %></p></div>
-              </a>
-            </div>
-          <%
-            });
-          %>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-      </div>`;
-
-    return _.template(templateString)({ items: filteredItems });
-  }
-
   this.buildSlider = async ({ selector, classData }) => {
     const data = await apiClient.getSeasonNow();
 
@@ -56,10 +22,12 @@ const Utils = function () {
             _.each(items, (item, key, list) => {
           %>
             <div class="swiper-slide">
-              <a type="link" href="">
-                <img src="<%- item.imageUrl %>" />
-                <div class="title"><p><%- item.title %></p></div>
-              </a>
+              <div class="slide-card">
+                <a type="link" href="">
+                  <img src="<%- item.imageUrl %>" />
+                  <div class="title"><p><%- item.title %></p></div>
+                </a>
+              </div>
             </div>
           <%
             });
@@ -76,7 +44,7 @@ const Utils = function () {
 
     const swiper = new Swiper(`.${classData}`, {
       slidesPerView: 4,
-      spaceBetween: 20,
+      spaceBetween: 40,
       autoHeight: false,
       loop: true,
       // pagination: {

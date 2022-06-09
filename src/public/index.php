@@ -15,6 +15,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
          <!-- We use module since we make and export and import -->
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <script type="module" src="js/api-client.js"></script>
         <script type="module" src="js/utils.js"></script>
         <script type="module" src="js/app.js"></script>
