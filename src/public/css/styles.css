@@ -113,7 +113,7 @@ div[class^="swiper-list"] .slide-card:hover .title {
 
 .more-pupular-anime .description-card {
   background: #ffffff;
-  max-width: 600px;
+  max-width: 700px;
   position: relative;
   height: 100%;
   display: flex;
@@ -143,4 +143,24 @@ header {
   padding: 40px;
   display: flex;
   align-items: center;
+}
+
+.more-pupular-anime .swiper-button-next,
+.more-pupular-anime .swiper-button-prev {
+  color: #ffffff;
+}
+
+.more-pupular-anime .swiper-button-next {
+  right: 20px;
+  left: auto;
+}
+
+.more-pupular-anime .swiper-button-prev {
+  left: 20px;
+  right: auto;
+}
+
+.more-pupular-anime .swiper-button-next:after,
+.more-pupular-anime .swiper-button-prev:after {
+  font-size: 80px;
 }
