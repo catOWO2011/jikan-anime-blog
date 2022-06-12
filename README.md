@@ -4,6 +4,7 @@ It's a web page that is working with the following technologies :floppy_disk::
 - CSS
 - Javascript
 - jQuery
+- <a href="https://swiperjs.com/">Swiperjs</a>
 
 The web page is a static web page that is working with data that come from <a href="https://docs.api.jikan.moe/">Jikan API</a>
 
