@@ -50,39 +50,48 @@ body {
   padding: 50px 0px;
 }
 
-.swiper.seasons-now-slide {
+div[class^="swiper-list"]:first-child {
+  padding-bottom: 0px;
+}
+
+div[class^="swiper-list"] .swiper {
   padding: 40px;
 }
 
-.swiper-list-seasons-now p {
+div[class^="swiper-list"] p.title-slide {
   text-transform: capitalize;
+  font-size: 26px;
+  font-weight: bold;
 }
 
-.swiper-list-seasons-now {
+div[class^="swiper-list"] {
   padding: 50px;
 }
+div[class^="swiper-list"] ~ div[class^="swiper-list"] {
+  padding-top: 0px;
+}
 
-.swiper-list-seasons-now .title {
+div[class^="swiper-list"] .title {
   display: none;
 }
 
-.swiper-list-seasons-now .slide-card img {
+div[class^="swiper-list"] .slide-card img {
   border-radius: 15px;
 }
 
-.swiper-list-seasons-now .slide-card {
+div[class^="swiper-list"] .slide-card {
   border-radius: 15px;
 }
 
-.swiper-list-seasons-now .slide-card:hover {
+div[class^="swiper-list"] .slide-card:hover {
   transform: scale(1.2);
 }
 
-.swiper-list-seasons-now .slide-card:hover img {
+div[class^="swiper-list"] .slide-card:hover img {
   border: solid 3px #007CEF;
 }
 
-.swiper-list-seasons-now .slide-card:hover .title {
+div[class^="swiper-list"] .slide-card:hover .title {
   display: block;
   border-radius: 0px 0px 15px 15px;
   text-align: center;

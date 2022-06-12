@@ -24,7 +24,7 @@ const APIClient = function () {
     });
 
     return data;
-  }
+  },
 
   this.getSeasonNow = async () => {
 
@@ -46,6 +46,35 @@ const APIClient = function () {
 
       data.season = season;
       data.year = year;
+    }
+
+    return data;
+  },
+
+  this.getTopAnime = async (queryParameters) => {
+    let queryStringParameters = '';
+
+    if (queryParameters) {
+      queryStringParameters = '?' + Object.entries(queryParameters)
+        .reduce(
+          (currentQuery, entry) => (currentQuery.length > 0 ?
+            `${currentQuery}&${entry[0]}=${entry[1]}` : `${currentQuery}${entry[0]}=${entry[1]}`), ''
+        );
+    }
+
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/top/anime${queryStringParameters}`
+    });
+
+    if (data && data.length > 0) {
+      data = _.map(data, item => {
+        const newItem = {};
+        newItem.title = item.title;
+        newItem.rank = item.rank;
+        newItem.imageUrl = item.images.jpg.large_image_url;
+        return newItem;
+      });
     }
 
     return data;

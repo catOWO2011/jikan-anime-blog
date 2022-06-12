@@ -11,4 +11,9 @@ $(document).ready(function(){
     selector: '.more-pupular-anime',
     classData: 'more-popular-slide'
   });
+
+  utils.buildTopAiringAnime({
+    selector: '.swiper-list-top-airing',
+    classData: 'top-airing-slide'
+  });
 });

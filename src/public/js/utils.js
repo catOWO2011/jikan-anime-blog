@@ -14,7 +14,7 @@ const Utils = function () {
 
     let templateString = `
       <div>
-        <p><%- items.season %> <%- items.year %> Anime</p>
+        <p class="title-slide"><%- items.season %> <%- items.year %> Anime</p>
       </div>
       <div class="swiper ${classData}">
         <div class="swiper-wrapper">
@@ -47,16 +47,12 @@ const Utils = function () {
       spaceBetween: 40,
       autoHeight: false,
       loop: true,
-      // pagination: {
-      //   el: ".swiper-pagination",
-      //   clickable: true,
-      // },
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
     });
-  }
+  },
 
   this.buildPopularSlider = async ({ selector, classData }) => {
     let data = await apiClient.getSeasonNow();
@@ -124,6 +120,51 @@ const Utils = function () {
       .attr('style', `background-image:linear-gradient(196deg, #4533d5c7, rgb(60 245 193 / 77%)),
         url(${data[0].imageUrl});`
       );
+  },
+
+  this.buildTopAiringAnime = async ({ selector, classData }) => {
+    const data = await apiClient.getTopAnime({ filter: 'airing' });
+
+    let templateString = `
+      <div>
+        <p class="title-slide">Top Airing Anime</p>
+      </div>
+      <div class="swiper ${classData}">
+        <div class="swiper-wrapper">
+          <%
+            _.each(items, (item, key, list) => {
+          %>
+            <div class="swiper-slide">
+              <div class="slide-card">
+                <a type="link" href="">
+                  <img src="<%- item.imageUrl %>" />
+                  <div class="title"><p><%- item.title %></p></div>
+                </a>
+              </div>
+            </div>
+          <%
+            });
+          %>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>`;
+
+    const htmlSlide = _.template(templateString)({ items: data });
+
+    $(selector).html(htmlSlide);
+
+    const swiper = new Swiper(`.${classData}`, {
+      slidesPerView: 4,
+      spaceBetween: 40,
+      autoHeight: false,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
   }
 }
 
