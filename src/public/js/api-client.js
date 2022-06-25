@@ -38,6 +38,7 @@ const APIClient = function () {
 
       data = _.map(data, item => {
         const newItem = {};
+        newItem.id = item.mal_id,
         newItem.title = item.title;
         newItem.rank = item.rank;
         newItem.imageUrl = item.images.jpg.large_image_url;
@@ -76,6 +77,16 @@ const APIClient = function () {
         return newItem;
       });
     }
+
+    return data;
+  }
+
+  this.getAnimeById = async (animeId) => {
+
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/anime/${animeId}/full`
+    });
 
     return data;
   }

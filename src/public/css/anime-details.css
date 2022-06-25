@@ -1,0 +1,38 @@
+body {
+  margin: 0px;
+}
+
+/* HEADER */
+
+.anime-details .header {
+  position: relative;
+}
+
+.anime-details .image-card {
+  position: relative;
+}
+
+.anime-details img {
+  width: 20%;
+  margin-top: -100px;
+  margin-left: 50px;
+  border-radius: 15px;
+}
+
+.anime-details .header .title-header {
+  width: 100%;
+  background-size: cover;
+  padding: 20% 0px 0px;
+}
+
+.anime-details .title-header .title-content {
+  margin-left: calc(100% - 73%);
+}
+
+.anime-details .header .title-description {
+  background: #007CEF;
+}
+
+.anime-details .header .title-description-body {
+  margin-left: calc(100% - 73%);
+}

@@ -9,6 +9,18 @@ const Utils = function () {
     return data;
   };
 
+  this.parserQuery = (locationSearch) => {
+    const tokens = locationSearch.substring(1).split('&');
+    let params = {};
+
+    tokens.forEach(paramToken => {
+      const variable = paramToken.split('=');
+      params[variable[0]] = decodeURIComponent(variable[1]);
+    });
+
+    return params;
+  };
+
   this.buildSlider = async ({ selector, classData }) => {
     const data = await apiClient.getSeasonNow();
 
@@ -23,7 +35,7 @@ const Utils = function () {
           %>
             <div class="swiper-slide">
               <div class="slide-card">
-                <a type="link" href="">
+                <a type="link" href="anime-details.php?id=<%- item.id %>">
                   <img src="<%- item.imageUrl %>" />
                   <div class="title"><p><%- item.title %></p></div>
                 </a>
@@ -165,6 +177,43 @@ const Utils = function () {
         prevEl: ".swiper-button-prev",
       },
     });
+  }
+
+  this.buildAnimeDetails = async ({ selector, classData}) => {
+    const locationSearch = window.location.search;
+    const params = this.parserQuery(locationSearch);
+    const data = await apiClient.getAnimeById(params.id);
+
+    let templateString = `
+      <div class="${classData}">
+        <div class="header">
+          <div class="title-header"\
+            style="
+            background:
+              linear-gradient(196deg, #4533d5c7, rgb(60 245 193 / 77%)),
+              url(<%- item.images.jpg.large_image_url %>);
+            background-size: cover;"
+          >
+            <div class="title-content">
+              <%- item.title %>
+            </div>
+          </div>
+          
+          <div class="title-description">
+            <div class="title-description-body">
+              Synopsis
+            </div>
+          </div>
+          <img src="<%- item.images.jpg.large_image_url %>" />
+        </div>
+      </div>
+    `;
+
+    const htmlAnimeDetails = _.template(templateString)({ item: data });
+
+    $(selector).html(htmlAnimeDetails);
+
+    console.log(data, 'from utils');
   }
 }
 
