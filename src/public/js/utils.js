@@ -21,6 +21,17 @@ const Utils = function () {
     return params;
   };
 
+  this.formatThousandsUnit = (number) => {
+    let formattedNumber = '';
+
+    if (typeof number === 'number') {
+      formattedNumber = number.toString();
+    }
+    formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    return formattedNumber;
+  };
+
   this.buildSlider = async ({ selector, classData }) => {
     const data = await apiClient.getSeasonNow();
 
@@ -184,6 +195,18 @@ const Utils = function () {
     const params = this.parserQuery(locationSearch);
     const data = await apiClient.getAnimeById(params.id);
 
+    data.members = this.formatThousandsUnit(data.members);
+    data.scored_by = this.formatThousandsUnit(data.scored_by);
+
+    data.genres = data.genres.reduce((p, c) => {
+      const { name } = c;
+      return p + (p.length > 0 ? ', ' : '') + name;
+    }, '');
+    data.studios = data.studios.reduce((p, c) => {
+      const { name } = c;
+      return p + (p.length > 0 ? ', ' : '') + name;
+    }, '');
+
     let templateString = `
       <div class="${classData}">
         <div class="header">
@@ -195,16 +218,56 @@ const Utils = function () {
             background-size: cover;"
           >
             <div class="title-content">
-              <%- item.title %>
+              <p class="title"><%- item.title %></p>
+              <% if (item.title_english !== null) {%>
+                <p class="english-title"><%- item.title_english %></p>
+              <% } %>
             </div>
           </div>
           
           <div class="title-description">
             <div class="title-description-body">
-              Synopsis
+              <div class="description-top">
+                <p>Synopsis</p>
+                <div class="quantity">
+                  <div>
+                    <span>Ranked:</span>
+                    #<%- item.rank %>
+                  </div>
+                  <div>
+                    <span>Popularity:</span>
+                    #<%- item.popularity %>
+                  </div>
+                  <div>
+                    <span>Members:</span>
+                    <%- item.members %>
+                  </div>
+                </div>
+              </div>
+              <p class="synopsis-description">
+                <%- item.synopsis %>
+              </p>
             </div>
           </div>
           <img src="<%- item.images.jpg.large_image_url %>" />
+          <div class="title-description-tags">
+            <div class="score-tag">
+              <span class="score-title">SCORE</span>
+              <span class="score-points"><%- item.score %></span>
+              <div class="score-by">
+                <span><%- item.scored_by %></span><span>users</span>
+              </div>
+            </div>
+            <div class="tags">
+              <div><span>Type: </span> <%- item.type %></div>
+              <div><span>Episodes: </span> <%- item.episodes %></div>
+              <div><span>Genres: </span> <%- item.genres %></div>
+              <div><span>Status: </span> <%- item.status %></div>
+              <div><span>Aired: </span> <%- item.aired.string %></div>
+              <div><span>Broadcast: </span> <%- item.broadcast.string %></div>
+              <div><span>Studios: </span> <%- item.studios %></div>
+            </div>
+          </div>
         </div>
       </div>
     `;

@@ -20,7 +20,7 @@
   <script type="module" src="js/anime-details.js"></script>
 </head>
 <body>
-  <div class="anime-details-container">
+  <div class="anime-details-header-container">
 
   </div>
 </body>
