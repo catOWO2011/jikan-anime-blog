@@ -209,6 +209,7 @@ span {
 .menu-details {
   display: flex;
   justify-content: flex-start;
+  border-bottom: 5px solid #FF9700;
 }
 
 .anime-details-body-container
@@ -217,7 +218,19 @@ span {
 li {
   list-style-type: none;
   cursor: pointer;
-  margin: 10px;
+  margin: 0px 10px;
+  padding: 10px;
+  background: #ff9700ad;
+  color: #FFFFFF;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-nav-bar
+.menu-details
+li.active {
+  background: #FF9700;
 }
 
 /* VIDEO LIST */
@@ -299,6 +312,16 @@ a img {
   background: #DAECFC;
   border-radius: 10px;
   padding: 10px;
+  font-size: 11px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.character-description
+.role-desc {
+  color: #787878;
 }
 
 .anime-details-body-container
@@ -341,8 +364,17 @@ a img {
 .anime-details-body-content
 .anime-characters-and-staff-content
 .characters-and-staff-content
+.character-description
+.voice-actors .voice-actor .actor-language {
+  color: #787878;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
 .anime-character img {
-  width: 40%;
+  width: 60%;
   border-radius: 10px;
 }
 

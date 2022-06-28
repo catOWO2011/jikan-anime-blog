@@ -13,47 +13,52 @@ $(document).ready(async function(){
 
   class MenuActions {
     menuContainer;
-    constructor({ menuContainer, contentTarget, utilMap }) {
+    constructor({
+      menuContainer,
+      contentTarget,
+      utilMap,
+      defaultContentToShow
+    }) {
       this.menuContainer = menuContainer;
       this.contentTarget = contentTarget;
+      this.defaultContentToShow = defaultContentToShow;
       this.utilMap = utilMap;
       this.previousTargetName = null;
-      this.hideContents();
 
       // Actions
-      $(`${menuContainer} li`).on('click', async ({ target }) => {
-        const targetName = $(target).data('targetContent');
-        console.log(targetName, '...targetName');
+      $(`${this.menuContainer} li`).on('click', async ({ target }) => {
+        const targetListItem = $(target);
+        const targetName = targetListItem.data('targetContent');
 
         if (this.previousTargetName) {
-          $(`div[data-target-source='${this.previousTargetName}']`).parent().hide();
+          const previousElement = $(`div[data-target-source='${this.previousTargetName}']`);
+          const parentComponent = previousElement.parent();
+          parentComponent.hide();
+          const previousTargetListItem = $(`li[data-target-content='${this.previousTargetName}']`);
+          previousTargetListItem.removeClass('active');
         }
         
         await this.utilMap[targetName]();
-        console.log($(`div[data-target-source='${targetName}']`));
-        $(`div[data-target-source='${targetName}']`).parent().show();
+        const targetElement = $(`div[data-target-source='${targetName}']`);
+        const parentTarget = targetElement.parent();
+        parentTarget.show();
+
+        targetListItem.addClass('active');
+
         this.previousTargetName = targetName;
       });
     }
 
-    hideContents = () => {
+    setupContents = () => {
       $(`${this.contentTarget}`).children().hide();
-      // console.log($(`${this.menuContainer}`).find('li'));
-      // const list = $(`${this.menuContainer}`).find('li');
-
-      // $.each(list, (index, li) => {
-      //   const element = $(li);
-      //   const targetName = element.data('targetContent');
-      //   const targetElement = $($(`${this.contentTarget}`).find(`div[data-target-source='${targetName}']`));
-      //   console.log($(`${this.contentTarget}`).html(), 'target');
-      //   targetElement.parent().hide();
-      // });
+      $(`${this.menuContainer} li[data-target-content="${this.defaultContentToShow}"]`).trigger('click');
     }
   };
 
   const menu = new MenuActions({
     menuContainer: '.anime-details-body-nav-bar',
     contentTarget: '.anime-details-body-content',
+    defaultContentToShow: 'video-list-content',
     utilMap: {
       'video-list-content': async () => {
         await utils.buildAnimeVideoDetails({
@@ -70,5 +75,7 @@ $(document).ready(async function(){
       }
     }
   });
+
+  menu.setupContents();
 
 });

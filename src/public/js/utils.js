@@ -7,7 +7,7 @@ const Utils = function () {
   this.getResponseData = (responseBody) => {
     const { data } = responseBody;
     return data;
-  };
+  },
 
   this.parserQuery = (locationSearch) => {
     const tokens = locationSearch.substring(1).split('&');
@@ -19,7 +19,7 @@ const Utils = function () {
     });
 
     return params;
-  };
+  },
 
   this.formatThousandsUnit = (number) => {
     let formattedNumber = '';
@@ -30,9 +30,58 @@ const Utils = function () {
     formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     return formattedNumber;
-  };
+  },
 
-  this.buildSlider = async ({ selector, classData }) => {
+  this.buildSeasonUpcommingSlider = async ({ selector, classData }) => {
+    const data = await apiClient.getSeasonUpcoming();
+
+    data.sort((itemA, itemB) => {
+      return itemB.members - itemA.members;
+    });
+
+    let templateString = `
+      <div>
+        <p class="title-slide"><%- items.season %> <%- items.year %> Anime</p>
+      </div>
+      <div class="swiper ${classData}">
+        <div class="swiper-wrapper">
+          <%
+            _.each(items, (item, key, list) => {
+          %>
+            <div class="swiper-slide">
+              <div class="slide-card">
+                <a type="link" href="anime-details.php?id=<%- item.id %>">
+                  <img src="<%- item.imageUrl %>" />
+                  <div class="title"><p><%- item.title %></p></div>
+                </a>
+              </div>
+            </div>
+          <%
+            });
+          %>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>`;
+
+    const htmlSlide = _.template(templateString)({ items: data });
+
+    $(selector).html(htmlSlide);
+
+    const swiper = new Swiper(`.${classData}`, {
+      slidesPerView: 4,
+      spaceBetween: 40,
+      autoHeight: false,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  },
+
+  this.buildSeasonSlider = async ({ selector, classData }) => {
     const data = await apiClient.getSeasonNow();
 
     let templateString = `
@@ -316,17 +365,13 @@ const Utils = function () {
 
     const htmlList =_.template(templateString)({ items: data });
     $(selector).html(htmlList);
-
-    console.log('dataVideosAnime', data);
   },
 
   this.buildAnimeCharactersAndStaff = async ({ selector, classData }) => {
     const locationSearch = window.location.search;
     const { id } = this.parserQuery(locationSearch);
     let characteresData = await apiClient.getAnimeCharacters(id);
-    console.log(characteresData, 'charsData');
     let staffData = await apiClient.getAnimeStaff(id);
-    console.log(staffData, 'staffData');
 
     let templateString = `
       <div class="${classData}" data-target-source="characters-and-staff-content">
@@ -341,7 +386,7 @@ const Utils = function () {
                   <div>
                     <%- character.character.name %>
                   </div>
-                  <div>
+                  <div class="role-desc">
                     <%- character.role %>
                   </div>
                 </div>
@@ -356,7 +401,7 @@ const Utils = function () {
                       <div>
                         <%- actor.person.name %>
                       </div>
-                      <div>
+                      <div class="actor-language">
                         <%- actor.language %>
                       </div>
                     </div>

@@ -52,6 +52,41 @@ const APIClient = function () {
     return data;
   },
 
+  this.getSeasonUpcoming = async () => {
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/seasons/upcoming`
+    });
+
+    data = _.filter(data, item => item.season !== null);
+
+    const { season, year } = data[0];
+
+    await new Promise(resolve => setTimeout(() => resolve(), 1000));
+
+    data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/seasons/${year}/${season}`
+    });
+
+    if (data && data.length > 0) {
+
+      data = _.map(data, item => {
+        const newItem = {};
+        newItem.id = item.mal_id,
+        newItem.title = item.title;
+        newItem.members = item.members;
+        newItem.imageUrl = item.images.jpg.large_image_url;
+        return newItem;
+      });
+
+      data.season = season;
+      data.year = year;
+    }
+
+    return data;
+  },
+
   this.getTopAnime = async (queryParameters) => {
     let queryStringParameters = '';
 

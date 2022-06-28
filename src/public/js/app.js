@@ -1,19 +1,24 @@
 import utils from './utils.js';
 
-$(document).ready(function(){
+$(document).ready(async function(){
 
-  utils.buildSlider({
+  await utils.buildSeasonUpcommingSlider({
+    selector: '.swiper-list-season-upcomming',
+    classData: 'seasons-upcomming-slide'
+  });
+
+  await utils.buildSeasonSlider({
     selector: '.swiper-list-seasons-now',
     classData: 'seasons-now-slide'
   });
 
-  utils.buildPopularSlider({
+  await utils.buildPopularSlider({
     selector: '.more-pupular-anime',
     classData: 'more-popular-slide'
   });
 
-  utils.buildTopAiringAnime({
-    selector: '.swiper-list-top-airing',
-    classData: 'top-airing-slide'
-  });
+  // await utils.buildTopAiringAnime({
+  //   selector: '.swiper-list-top-airing',
+  //   classData: 'top-airing-slide'
+  // });
 });

@@ -26,10 +26,10 @@
     <div class="anime-details-body-container">
       <div class="anime-details-body-nav-bar">
         <ul class="menu-details">
-          <li class="active" data-target-content="video-list-content">
+          <li class="" data-target-content="video-list-content">
             Videos
           </li>
-          <li class="active" data-target-content="characters-and-staff-content">
+          <li class="" data-target-content="characters-and-staff-content">
             Characters & Staff
           </li>
         </ul>
@@ -38,7 +38,6 @@
         <div class="anime-videos-content">
         </div>
         <div class="anime-characters-and-staff-content">
-          HEEE
         </div>
       </div>
     </div>
