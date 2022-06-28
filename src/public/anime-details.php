@@ -20,8 +20,28 @@
   <script type="module" src="js/anime-details.js"></script>
 </head>
 <body>
-  <div class="anime-details-header-container">
-
+  <div class="main-anime-details-container">
+    <div class="anime-details-header-container">
+    </div>
+    <div class="anime-details-body-container">
+      <div class="anime-details-body-nav-bar">
+        <ul class="menu-details">
+          <li class="active" data-target-content="video-list-content">
+            Videos
+          </li>
+          <li class="active" data-target-content="characters-and-staff-content">
+            Characters & Staff
+          </li>
+        </ul>
+      </div>
+      <div class="anime-details-body-content">
+        <div class="anime-videos-content">
+        </div>
+        <div class="anime-characters-and-staff-content">
+          HEEE
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

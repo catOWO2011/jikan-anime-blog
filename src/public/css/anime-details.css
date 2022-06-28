@@ -23,7 +23,6 @@ body {
 
 .anime-details .header .title-header {
   width: 100%;
-  background-size: cover;
   padding: 20% 0px 0px;
 }
 
@@ -124,8 +123,8 @@ span {
   background: #007CEF;
   color: #FFFFFF;
   margin-top: -25px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
 }
@@ -200,4 +199,159 @@ span {
 .score-tag
 .score-by span {
   padding: 5px;
+}
+
+/* BODY ANIME DETAILS*/
+
+/* MENU NAV BAR */
+.anime-details-body-container
+.anime-details-body-nav-bar
+.menu-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.anime-details-body-container
+.anime-details-body-nav-bar
+.menu-details
+li {
+  list-style-type: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* VIDEO LIST */
+.anime-details-body-container
+.anime-details-body-content
+.video-list-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding: 20px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.video-list-content
+.video-episode {
+  width: 100%;
+  display: inline-block;
+  background: rgb(0 0 0 / 40%);
+  border-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.video-list-content
+.video-episode
+a {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.video-list-content
+.video-episode
+a img {
+  border-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.video-list-content
+.video-episode
+.video-info-container {
+  font-size: 11px;
+  color: #FFFFFF;
+  padding: 5px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: rgb(0 0 0 / 40%);
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* CHARACTERS AND STAFF LIST */
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content {
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.character-description {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: #DAECFC;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.character-description
+.voice-actors {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.character-description
+.voice-actors .voice-actor {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 5px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.character-description
+.voice-actors .voice-actor img {
+  width: 10%;
+  margin-right: 15px;
+  border-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.anime-character img {
+  width: 40%;
+  border-radius: 10px;
+}
+
+.anime-details-body-container
+.anime-details-body-content
+.anime-characters-and-staff-content
+.characters-and-staff-content
+.anime-character
+.character-description {
+  display: flex;
+  flex-direction: column;
 }

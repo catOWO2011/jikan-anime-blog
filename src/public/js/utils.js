@@ -188,9 +188,11 @@ const Utils = function () {
         prevEl: ".swiper-button-prev",
       },
     });
-  }
+  },
 
-  this.buildAnimeDetails = async ({ selector, classData}) => {
+  this.buildAnimeHeaderDetails = async ({ selector, classData}) => {
+    $('.anime-details-body-container').hide();
+
     const locationSearch = window.location.search;
     const params = this.parserQuery(locationSearch);
     const data = await apiClient.getAnimeById(params.id);
@@ -215,7 +217,8 @@ const Utils = function () {
             background:
               linear-gradient(196deg, #4533d5c7, rgb(60 245 193 / 77%)),
               url(<%- item.images.jpg.large_image_url %>);
-            background-size: cover;"
+            background-size: cover;
+            background-attachment: fixed;"
           >
             <div class="title-content">
               <p class="title"><%- item.title %></p>
@@ -276,7 +279,102 @@ const Utils = function () {
 
     $(selector).html(htmlAnimeDetails);
 
-    console.log(data, 'from utils');
+    $('.anime-details-body-container').show();
+  },
+
+  this.buildAnimeVideoDetails = async ({ selector, classData }) => {
+
+    const locationSearch = window.location.search;
+    const params = this.parserQuery(locationSearch);
+    const data = await apiClient.getAnimeVideos(params.id);
+
+    let templateString = `
+      <div class="${classData}" data-target-source="video-list-content">
+        <div class="video-list-content">
+          <%
+          _.each(items.episodes, (episode, key, list) => {
+          %>
+            <div class="video-episode">
+              <a href="<%- episode.url %>">
+                <img src="<%- episode.images.jpg.image_url %>" alt="episode-<%- key %>" />
+                <div class="video-info-container">
+                  <span class="title">
+                    <%- episode.episode %> <br>
+                    <span class="episode-title">
+                      <%- episode.title %>
+                    </span>
+                  </span>
+                </div>
+              </a>
+            </div>
+          <%
+            });
+          %>
+        </div>
+      </div>
+    `;
+
+    const htmlList =_.template(templateString)({ items: data });
+    $(selector).html(htmlList);
+
+    console.log('dataVideosAnime', data);
+  },
+
+  this.buildAnimeCharactersAndStaff = async ({ selector, classData }) => {
+    const locationSearch = window.location.search;
+    const { id } = this.parserQuery(locationSearch);
+    let characteresData = await apiClient.getAnimeCharacters(id);
+    console.log(characteresData, 'charsData');
+    let staffData = await apiClient.getAnimeStaff(id);
+    console.log(staffData, 'staffData');
+
+    let templateString = `
+      <div class="${classData}" data-target-source="characters-and-staff-content">
+        <div class="characters-and-staff-content">
+          <%
+            _.each(items, (character) => {
+          %>
+            <div class="character-description">
+              <div class="anime-character">
+                <img src="<%- character.character.images.jpg.image_url %>" alt="<%- character.character.name %>" />
+                <div class="character-description">
+                  <div>
+                    <%- character.character.name %>
+                  </div>
+                  <div>
+                    <%- character.role %>
+                  </div>
+                </div>
+              </div>
+              <div class="voice-actors">
+                <%
+                  _.each(character.voice_actors, (actor) => {
+                %>
+                  <div class="voice-actor">
+                    <img src="<%- actor.person.images.jpg.image_url %>" alt="<%- actor.person.name %>" />
+                    <div class="voice-actor-description">
+                      <div>
+                        <%- actor.person.name %>
+                      </div>
+                      <div>
+                        <%- actor.language %>
+                      </div>
+                    </div>
+                  </div>
+                <%
+                  });
+                %>
+              </div>
+            </div>
+          <%
+            });
+          %>
+        </div>
+      </div>
+    `;
+
+    const htmlCharacters = _.template(templateString)({ items: characteresData});
+    $(selector).html(htmlCharacters);
   }
 }
 

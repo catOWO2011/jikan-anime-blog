@@ -79,13 +79,41 @@ const APIClient = function () {
     }
 
     return data;
-  }
+  },
 
   this.getAnimeById = async (animeId) => {
 
     let data = await this.makeRequest({
       type: GET,
       url: `${BASE_URL}/${URL_VERSION}/anime/${animeId}/full`
+    });
+
+    return data;
+  },
+
+  this.getAnimeVideos = async (animeId) => {
+
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/anime/${animeId}/videos`
+    });
+
+    return data;
+  }
+
+  this.getAnimeCharacters = async (animeId) => {
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/anime/${animeId}/characters`
+    });
+
+    return data;
+  },
+
+  this.getAnimeStaff = async (animeId) => {
+    let data = await this.makeRequest({
+      type: GET,
+      url: `${BASE_URL}/${URL_VERSION}/anime/${animeId}/staff`
     });
 
     return data;
